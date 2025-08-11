@@ -2,126 +2,157 @@
 <html lang="fr">
 <head>
   <title>Evan Lajusticia</title>
-  
-  <link rel="preload" href="./fonts/HostGrotesk-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+
+  <link rel="preload" href="/fonts/HostGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="main.css" as="style">
   <link rel="stylesheet" type="text/css" href="main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward,arrow_outward,code,text_format,widgets" />
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Evan Lajusticia - Portfolio - Développeur web créatif">
+
+  <meta property="og:title" content="Evan Lajusticia - Développeur Web">
+  <meta property="og:description" content="Evan Lajusticia - Portfolio - Développeur web créatif">
 </head>
-<body class="">
-  <div id="background"></div>
-  <main class="content">
-    <section id="presentation">
-      <h1>Salut ! 👋 Moi, c'est Evan.</h1>
-      <p>
-        Je suis un créatif et un développeur web. Je concentre mon travail sur des expériences et interfaces utilisateurs de qualité, et l'accessibilité et la responsabilité écologique sont au coeur de ma refléxion.
-      </p>
-      <p>
-        Dans mon temps libre, j'aime travailler sur mes projets personnels, développer des jeux-vidéos avec <a href="https://leplacard.itch.io/">Lilian <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>, grimper des blocs dans la salle d'escalade de ma ville, et jouer à des jeux vidéos. Depuis 3 ans, je travaille chez <a href="https://attineos.com">Attineos <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>.
-      </p>
-    </section>
+<body>
+  <div id="background" aria-hidden="true"></div>
+  <section id="presentation">
+    <h1>Salut ! 👋 Moi, c'est Evan.</h1>
+    <p>
+      Je suis un créatif et un développeur web. Je concentre mon travail sur des expériences et interfaces utilisateurs de qualité, et l'accessibilité et la responsabilité écologique sont au coeur de ma refléxion.
+    </p>
+    <p>
+      <span>Dans mon temps libre, j'aime travailler sur mes projets personnels, développer des</span>
+      <a href="https://turnip-studio.itch.io/" target="_blank">
+        <span>jeux-vidéos</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+          <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+        </svg>
+      </a> 
+      <span>avec mes amis et grimper des blocs dans la salle d'escalade de ma ville. Depuis 3 ans, je travaille chez</span>
+      <a href="https://attineos.com" target="_blank">
+        <span>Attineos</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+          <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+        </svg>
+      </a>.
+    </p>
+  </section>
 
-    <section id="experience">
-      <h2>Expériences</h2>
+  <section id="experience">
+    <h2>Expériences</h2>
+
+    <table>
+      <tr>
+        <td class="experience-date">
+          <span>2022 — aujourd'hui</span>
+        </td>
+        <td>
+          <h3>Ingénieur Études & Développement · Attineos</h3>
+          <span>Développement d'applications web en <strong>Angular</strong>, <strong>React</strong> et <strong>.NET</strong>. Gestion d'une librairie de composant à l'aide de <strong>Storybook</strong>.</span>  
+          <div class="pills">
+            <div class="pill">Angular</div>
+            <div class="pill">React</div>
+            <div class="pill">.NET</div>
+            <div class="pill">Gitlab CI</div>
+            <div class="pill">SCSS</div>
+            <div class="pill">Node.js</div>
+            <div class="pill">Storybook</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="experience-date">
+          <span>Études</span>
+        </td>
+        <td>
+          <h3>Master Génie Informatique & Logiciel · Université de Rouen</h3>
+          <span>Vous pouvez trouver mes projets universitaires sur mon <a href="https://github.com/evanlaj">Github<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></a>.</span>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <h3>DUT Informatique · IUT du Havre</h3>
+          <span>Le début de mes études en informatique !</span>
+        </td>
+      </tr>
+    </table>
+  </section>
   
-      <table>
-        <tr>
-          <td class="experience-date">
-            <span>2022 — aujourd'hui</span>
-          </td>
-          <td>
-            <h3>Ingénieur Études & Développement · Attineos</h3>
-            <span>Développement d'applications web en <strong>Angular</strong>, <strong>React</strong> et <strong>.NET</strong>. Gestion d'une librairie de composant à l'aide de <strong>Storybook</strong>.</span>  
-            <div class="pills">
-              <div class="pill">Angular</div>
-              <div class="pill">React</div>
-              <div class="pill">.NET</div>
-              <div class="pill">Gitlab CI</div>
-              <div class="pill">SCSS</div>
-              <div class="pill">Node.js</div>
-              <div class="pill">Storybook</div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="experience-date">
-            <span>Études</span>
-          </td>
-          <td>
-            <h3>Master Génie Informatique & Logiciel · Université de Rouen</h3>
-            <span>Vous pouvez trouver mes projets universitaires sur mon <a href="https://github.com/evanlaj">Github <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>.</span>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <h3>DUT Informatique · IUT du Havre</h3>
-            <span>Le début de mes études en informatique !</span>
-          </td>
-        </tr>
-      </table>
-    </section>
+  <section id="projects">
+    <h2>Projets personnels</h2>
+
+    <a class="project" href="https://dnd.evanlajusticia.com/roll-initiative" target="_blank">
+      <div class="thumbnail">
+        <img src="/img/dnd.webp" alt="D&D World Index" loading="lazy">
+      </div>
+      <div class="project-content">
+        <h3>D&D World Index <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
+        <span>Feuille de personnages, résumés et traqueur d'initiative pour vos parties de D&D, avec une superbe interface réalisée en <strong>Angular</strong>.</span>
+      </div>
+    </a>
+
+    <a class="project" href="#">
+      <div class="thumbnail">
+        <img src="/img/pp.webp" alt="Poker Planning" loading="lazy">
+      </div>
+      <div class="project-content">
+        <h3>Poker Planning <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
+        <span>Une appli de poker planning. Parfait quand tout le monde est en télétravail ! Mise en place avec <strong>React</strong> et <strong>socket.io</strong>.</span>
+      </div>
+    </a>
+
+    <a class="project" href="#">
+      <div class="thumbnail">
+        <div class="placeholder"></div>
+      </div>
+      <div class="project-content">
+        <h3>Ce site internet !</h3>
+        <span>Mon petit coin d'internet. Réalisé en <strong>HTML</strong> & <strong>CSS</strong>. Construit avec <strong>Vite</strong>.</span>
+      </div>
+    </a>
+
+    <!-- <a class="project" href="#">
+      <div class="thumbnail">
+        <div class="placeholder"></div>
+      </div>
+      <div class="project-content">
+        <h3>Markdown Editor (WIP) <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
+        <span>Un outil de prise de note réalisé avec des <strong>Web Components</strong>. Enregistrer vos notes sur votre navigateur, ou bien exportez-les et emportez-les n'importe où !</span>
+      </div>
+    </a> -->
+
+  </section>
+
+  <section id="articles">
+    <h2>Articles</h2>
     
-    <section id="projects">
-      <h2>Projets personnels</h2>
+    <a class="article" href="#">
+      <div class="article-content">
+        <h3>Angular : Comment faire un composant interactif comme les pros ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+        <span>Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>.</span>
+      </div>
+    </a>
 
-      <a class="project" href="#">
-        <div class="thumbnail"></div>
-        <div class="project-content">
-          <h3>D&D World Index <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></h3>
-          <span>Feuille de personnages, résumés et traqueur d'initiative pour vos parties de D&D, avec une superbe interface réalisée en <strong>Angular</strong>.</span>
-        </div>
-      </a>
+    <a class="article" href="#">
+      <div class="article-content">
+        <h3>Socket.io : Les bases<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+        <span>TO-DO : Un résumé de mon article.</span>
+      </div>
+    </a>
 
-      <a class="project" href="#">
-        <div class="thumbnail"></div>
-        <div class="project-content">
-          <h3>Markdown Manager <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></h3>
-          <span>Un outil de prise de note réalisé avec des <strong>Web Components</strong>. Enregistrer vos notes sur votre navigateur, ou bien exportez-les et emportez-les n'importe où !</span>
-        </div>
-      </a>
+    <a class="article" href="#">
+      <div class="article-content">
+        <h3>Animer une signature en SVG<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+        <span>TO-DO : Un résumé de mon article.</span>
+      </div>
+    </a>
 
-      <a class="project" href="#">
-        <div class="thumbnail"></div>
-        <div class="project-content">
-          <h3>Poker Planning <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></h3>
-          <span>Une appli de poker planning. Parfait quand tout le monde est en télétravail ! Mise en place avec <strong>React</strong> et <strong>socket.io</strong>.</span>
-        </div>
-      </a>
+  </section>
 
-    </section>
-
-    <section id="articles">
-      <h2>Articles</h2>
-      
-      <a class="article" href="#">
-        <div class="article-content">
-          <h3>Angular : Comment faire un composant interactif comme les pros ? <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></h3>
-          <span>Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>.</span>
-        </div>
-      </a>
-
-      <a class="article" href="#">
-        <div class="article-content">
-          <h3>Socket.io : Les bases <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></h3>
-          <span>TO-DO : Un résumé de mon article.</span>
-        </div>
-      </a>
-
-      <a class="article" href="#">
-        <div class="article-content">
-          <h3>Animer une signature en SVG <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></h3>
-          <span>TO-DO : Un résumé de mon article.</span>
-        </div>
-      </a>
-
-    </section>
-
-    <div class="separator" role="presentation" aria-hidden="true"></div>
-  </main>
+  <div class="separator" role="presentation" aria-hidden="true"></div>
 
   <footer>
     <div class="footer-left">
@@ -133,7 +164,12 @@
         <span>HTML & CSS</span>
         <span>Host Grotesk</span>
         <span class="">Material Icons</span>
-        <a href="https://github.com/evanlaj/portfolio">Sources <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></a>
+        <a href="https://github.com/evanlaj/portfolio" target="_blank">
+          <span>Sources</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+          </svg>
+        </a>
       </div>
       <div class="contact">
         <span class="section-title">Contact</span>
@@ -146,6 +182,6 @@
     </div>
   </footer>
 
-  <div id="noise"></div>
+  <div id="noise" aria-hidden="true"></div>
 </body>
 </html>

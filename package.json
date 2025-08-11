@@ -1,0 +1,25 @@
+{
+  "name": "evan-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite build && vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanlaj/portfolio.git"
+  },
+  "author": "Evan Lajusticia",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^7.1.1",
+    "vite-plugin-html": "^3.2.2"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
