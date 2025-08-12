@@ -127,10 +127,13 @@ h1, h2 {
 }
 
 section {
+  position: relative;
   scroll-margin-top: 2rem;
   margin-bottom: 6rem;
 
-  animation: fade-in 0.25s ease-out both;
+  opacity: 0;
+
+  animation: fade-in 0.25s ease-out forwards;
 
   &:nth-child(2) { animation-delay: 0.2s; }
   &:nth-child(3) { animation-delay: 0.4s; }
@@ -495,11 +498,10 @@ footer {
 
 @keyframes fade-in {
   from {
-    opacity: 0;
-    translate: 0 1rem;
+    transform: translateY(1rem);
   }
   to {
     opacity: 1;
-    translate: 0;
+    transform: translateY(0);
   }
 }
