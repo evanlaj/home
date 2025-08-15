@@ -108,14 +108,15 @@ body {
     left: 50%;
     translate: -50% -50%;
 
-    width: 300vw;
-    height: 300vmax;
+    width: 400vmax;
+    height: 400vmax;
     
-    background-image: url('/img/noise.webp');
-    filter: saturate(0);
+    background-image: url('/img/noise.svg');
+    background-repeat: repeat;
+    background-size: 528px; 
     opacity: 0.06;
-    
-    animation: grain 10s steps(10) infinite;
+
+    animation: grain 5s steps(5) infinite;
   }
 }
 
@@ -353,6 +354,7 @@ footer {
 .colophon, .contact {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.125rem;
 }
 
@@ -418,6 +420,10 @@ footer {
   .project, .article {
     flex-direction: column;
     gap: 1rem;
+
+    .thumbnail {
+      height: auto;
+    }
   }
 }
 
@@ -446,6 +452,11 @@ footer {
   #noise:after {
     opacity: 0.03;
   }
+
+  section {
+    opacity: 1;
+  }
+
   
   section, #background, #noise:after {
     animation: none;
