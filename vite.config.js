@@ -41,9 +41,9 @@ export default defineConfig({
     
     // Rollup options for advanced bundling
     rollupOptions: {
-      // Main entry point - articles will be handled by the plugin
       input: {
-        main: path.resolve(__dirname, 'index.html')
+        main: path.resolve(__dirname, 'index.html'),
+        articles: path.resolve(__dirname, 'articles.css')
       },
       output: {
         // Keep assets organized in their folders
@@ -51,17 +51,14 @@ export default defineConfig({
           const info = assetInfo.name.split('.')
           const ext = info[info.length - 1]
           
-          // Keep fonts in fonts folder
           if (/ttf|otf|woff|woff2/.test(ext)) {
             return `fonts/[name].[ext]`
           }
           
-          // Keep images in img folder  
           if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/.test(ext)) {
             return `img/[name].[ext]`
           }
           
-          // Everything else goes to assets with hash
           return `assets/[name]-[hash].[ext]`
         },
         

@@ -151,11 +151,13 @@ export function viteArticlePlugin(options = {}) {
     async generateBundle(options, bundle) {
       // Find the CSS asset in the bundle
       let cssAssetFileName = '';
+      let articlesAssetFileName = '';
+      
       for (const [fileName, asset] of Object.entries(bundle)) {
-        if (fileName.includes('main') && fileName.endsWith('.css')) {
+        if (fileName.includes('main') && fileName.endsWith('.css'))
           cssAssetFileName = fileName;
-          break;
-        }
+        if (fileName.includes('articles') && fileName.endsWith('.css'))
+          articlesAssetFileName = fileName;
       }
       
       // Add articles as assets to the bundle
@@ -164,7 +166,10 @@ export function viteArticlePlugin(options = {}) {
           let content = article.content;
           
           if (cssAssetFileName)
-            content = content.replace(/href="\/main\.css"/g, `href="../${cssAssetFileName}"`);                      
+            content = content.replace(/href="\/main\.css"/g, `href="../${cssAssetFileName}"`);
+          
+          if (articlesAssetFileName)
+            content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);                      
           
           // Emit each article as an asset
           this.emitFile({
