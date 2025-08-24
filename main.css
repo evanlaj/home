@@ -15,6 +15,7 @@
   --dark-title: #F8F8F8;
   --dark-body: #B8C0DE;
   --dark-accent: #ff876f;
+  --dark-focus: #ebf8ff0b;
   --dark-highlight: rgba(242, 242, 255, 0.125);
   --dark-hightlight-alt: rgba(242, 242, 255, 0.1);
 
@@ -22,6 +23,7 @@
   --light-title: #121220;
   --light-body: #323242;
   --light-accent: #ff876f;
+  --light-focus: #fffff82d;
   --light-highlight: rgba(242, 242, 255, 0.8);
   --light-hightlight-alt: rgba(242, 242, 255, 0.3);
 
@@ -29,6 +31,7 @@
   --title: var(--dark-title);
   --body: var(--dark-body);
   --accent: var(--dark-accent);
+  --focus: var(--dark-focus);
   --highlight: var(--dark-highlight);
   --highlight-alt: var(--dark-hightlight-alt);
 }
@@ -38,6 +41,7 @@
   --title: var(--light-title);
   --body: var(--light-body);
   --accent: var(--light-accent);
+  --focus: var(--light-focus);
   --highlight: var(--light-highlight);
   --highlight-alt: var(--light-hightlight-alt);
 }
@@ -129,6 +133,7 @@ main {
 h1, h2 {
   font-weight: 800;
   color: var(--title);
+  text-wrap: pretty;
 }
 
 section {
@@ -269,15 +274,11 @@ code {
   border-top: 2px solid transparent;
 
   &:is(:hover, :focus-visible) {
-    background: #EBF8FF0B;
+    background: var(--focus);
     color: var(--title);
 
     border-top: 2px solid var(--highlight);
     border-bottom: 1px solid var(--highlight-alt);
-  }
-
-  .light &:is(:hover, :focus-visible) {
-    background: #FFFFF82D;
   }
 
   h3 {

@@ -1,11 +1,17 @@
 import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { viteArticlePlugin } from './vite-article-plugin.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   base: '/', 
   
   // Plugins
   plugins: [
+    viteArticlePlugin(),
     createHtmlPlugin({
       minify: {
         collapseWhitespace: true,
@@ -35,6 +41,10 @@ export default defineConfig({
     
     // Rollup options for advanced bundling
     rollupOptions: {
+      // Main entry point - articles will be handled by the plugin
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      },
       output: {
         // Keep assets organized in their folders
         assetFileNames: (assetInfo) => {
@@ -71,14 +81,14 @@ export default defineConfig({
   // Development server options
   server: {
     port: 3000,
-    open: true, // Auto-open browser
-    host: true  // Allow access from network
+    open: false,
+    host: true
   },
   
   // Preview server (for testing builds)
   preview: {
     port: 4173,
-    open: true
+    open: false
   },
   
   // Handle static assets
@@ -86,10 +96,7 @@ export default defineConfig({
   
   // CSS configuration
   css: {
-    // Enable CSS modules if needed (you probably don't need this)
-    modules: false,
-    
-    // PostCSS config (add if you want autoprefixer, etc.)
+    modules: false,    
     postcss: {}
   },
   
