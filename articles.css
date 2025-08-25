@@ -199,6 +199,13 @@ blockquote {
     vertical-align: middle;
     transform: scaleX(-1);
 
+    transition: transform 0.25s ease-in-out;
+  }
+
+  &:is(:hover, :focus) {
+    svg {
+      transform: scaleX(-1) translateX(3px);
+    }
   }
 }
 
