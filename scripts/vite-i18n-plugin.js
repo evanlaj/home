@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-function replaceTranslations(html, translations, lang) {
+function replaceTranslations(html, translations, lang, baseUrl = 'https://evanlajusticia.com') {
   let result = html
 
   result = result.replace(/lang="fr"/, `lang="${lang}"`)
@@ -9,6 +9,26 @@ function replaceTranslations(html, translations, lang) {
   // Helper function to get nested value from object
   function getNestedValue(obj, path) {
     return path.split('.').reduce((current, key) => current && current[key], obj)
+  }
+
+  // Add canonical URL and hreflang links before </head>
+  const headEndRegex = /<\/head>/
+  if (headEndRegex.test(result)) {
+    const currentUrl = lang === 'fr' ? baseUrl : `${baseUrl}/${lang}`
+    const frenchUrl = baseUrl
+    const englishUrl = `${baseUrl}/en`
+    
+    const seoLinks = `
+  <!-- Canonical URL -->
+  <link rel="canonical" href="${currentUrl}/" />
+  
+  <!-- Hreflang links for multilingual SEO -->
+  <link rel="alternate" hreflang="fr" href="${frenchUrl}/" />
+  <link rel="alternate" hreflang="en" href="${englishUrl}/" />
+  <link rel="alternate" hreflang="x-default" href="${englishUrl}/" />
+</head>`
+
+    result = result.replace(headEndRegex, seoLinks)
   }
 
   // Replace data-i18n attributes (text content)
@@ -81,6 +101,10 @@ export function viteI18nPlugin() {
           source: localizedHtml
         })
       })
+
+      // Add SEO links to the original index.html (fr)
+      const frenchWithSeo = replaceTranslations(htmlContent, {}, 'fr')
+      bundle[htmlFile].source = frenchWithSeo
     }
   }
 }

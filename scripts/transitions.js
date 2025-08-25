@@ -1,4 +1,5 @@
-// Page transition system
+import { getLocalizedPath } from './lang.js';
+
 class PageTransitions {
   constructor() {
     this.currentView = 'home';
@@ -17,7 +18,7 @@ class PageTransitions {
     });
 
     // Set initial state
-    if (window.location.pathname !== '/') {
+    if (window.location.pathname !== getLocalizedPath('/')) {
       this.currentView = 'article';
     }
   }
@@ -34,7 +35,7 @@ class PageTransitions {
       const homeLink = e.target.closest('a.home-link[href="/"], a.home-link[href=""]');
       if (homeLink && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
         e.preventDefault();
-        this.navigateToPage('/', 'home');
+        this.navigateToPage(getLocalizedPath('/'), 'home');
       }
     });
   }
@@ -70,7 +71,7 @@ class PageTransitions {
     
     if (path === '/') {
       if (this.currentView !== 'home') {
-        await this.navigateToPage('/', 'home', false);
+        await this.navigateToPage(getLocalizedPath('/'), 'home', false);
       }
     } else if (path.startsWith('/articles/')) {
       if (this.currentView !== 'article') {

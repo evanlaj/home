@@ -175,7 +175,7 @@ export function viteArticlePlugin(options = {}) {
           cssAssetFileName = fileName;
         if (fileName.includes('articles') && fileName.endsWith('.css'))
           articlesAssetFileName = fileName;
-        if (fileName.includes('main') && fileName.endsWith('.js'))  // Changed from 'app' to 'main'
+        if (fileName.includes('main') && fileName.endsWith('.js'))
           jsAssetFileName = fileName;
       }
       
@@ -191,7 +191,7 @@ export function viteArticlePlugin(options = {}) {
             content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);
           
           if (jsAssetFileName)
-            content = content.replace(/src="\/app\.js"/g, `src="../${jsAssetFileName}"`);  // This will replace the app.js reference with main.js
+            content = content.replace(/src="main\.js"/g, `src="../${jsAssetFileName}"`);
           
           // Emit each article as an asset
           this.emitFile({
