@@ -4,10 +4,12 @@
   <title>Evan Lajusticia</title>
 
   <link rel="preload" href="/fonts/HostGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+  
   <link rel="preload" href="/main.css" as="style">
-
-  <link rel="stylesheet" type="text/css" href="/articles.css">
   <link rel="stylesheet" type="text/css" href="/main.css">
+
+  <link rel="preload" href="/articles.css" as="style">
+  <link rel="stylesheet" type="text/css" href="/articles.css">
   
   <link rel="icon" type="image/png" href="/img/favicon.png">
   
@@ -18,12 +20,12 @@
   <meta property="og:title" content="Evan Lajusticia - Développeur Web">
   <meta property="og:description" content="Evan Lajusticia - Portfolio - Développeur web créatif">
 
-  <!-- <script src="/app.js" defer></script> -->
+  <script src="/app.js" type="module" defer></script>
 </head>
 <body>
   <div id="background" aria-hidden="true"></div>
 
-  <main>
+  <main class="page-fade">
     <a href="/" class="home-link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
       <span>Retour à la page d'accueil</span>
@@ -31,16 +33,16 @@
     <!-- ARTICLE_CONTENT -->
   </main>
 
-  <div class="separator" role="presentation" aria-hidden="true"></div>
+  <div class="separator page-fade" role="presentation" aria-hidden="true"></div>
 
-  <footer>
+  <footer class="page-fade">
     <div class="footer-left">
       &copy; 2025 Evan Lajusticia
     </div>
     <div class="footer-right">
       <div class="colophon">
         <span class="section-title">Colophon</span>
-        <span>HTML & CSS</span>
+        <span>HTML, CSS & JS</span>
         <span>Host Grotesk</span>
         <span class="">Material Icons</span>
         <a href="https://github.com/evanlaj/portfolio" target="_blank">

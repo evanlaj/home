@@ -149,15 +149,18 @@ export function viteArticlePlugin(options = {}) {
     },
     
     async generateBundle(options, bundle) {
-      // Find the CSS asset in the bundle
+      // Find the CSS and JS assets in the bundle
       let cssAssetFileName = '';
       let articlesAssetFileName = '';
+      let jsAssetFileName = '';
       
       for (const [fileName, asset] of Object.entries(bundle)) {
         if (fileName.includes('main') && fileName.endsWith('.css'))
           cssAssetFileName = fileName;
         if (fileName.includes('articles') && fileName.endsWith('.css'))
           articlesAssetFileName = fileName;
+        if (fileName.includes('main') && fileName.endsWith('.js'))  // Changed from 'app' to 'main'
+          jsAssetFileName = fileName;
       }
       
       // Add articles as assets to the bundle
@@ -169,7 +172,10 @@ export function viteArticlePlugin(options = {}) {
             content = content.replace(/href="\/main\.css"/g, `href="../${cssAssetFileName}"`);
           
           if (articlesAssetFileName)
-            content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);                      
+            content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);
+          
+          if (jsAssetFileName)
+            content = content.replace(/src="\/app\.js"/g, `src="../${jsAssetFileName}"`);  // This will replace the app.js reference with main.js
           
           // Emit each article as an asset
           this.emitFile({
