@@ -60,7 +60,7 @@ html, body {
 }
 
 body {
-  padding: 35dvh 26rem 10rem;
+  padding: calc(50dvh - 140px) 26rem 10rem;
   will-change: scroll-position;
 }
 
