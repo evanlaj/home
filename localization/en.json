@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "Evan Lajusticia",
+    "description": "Evan Lajusticia - Portfolio - Creative web developer",
+    "ogTitle": "Evan Lajusticia - Web Developer",
+    "ogDescription": "Evan Lajusticia - Portfolio - Creative web developer"
+  },
+  "presentation": {
+    "greeting": "Hi ! 👋",
+    "name": "I'm Evan.",
+    "intro": "I'm a creative software engineer. I focus my work on quality UX and UI, and <strong>accessibility</strong> and <strong>environmental responsibility</strong> are key parts of my thinking.",
+    "personal": "In my free time, I like to work on my personal projects, develop",
+    "games": "video games",
+    "withFriends": "with my friends and climb boulders at my city's gym. For 3 years, I've been working at",
+    "company": "Attineos"
+  },
+  "experience": {
+    "title": "Experience",
+    "current": {
+      "period": "2022 — Present",
+      "title": "Software Engineer · Attineos",
+      "description": "Development of web applications in <strong>Angular</strong>, <strong>React</strong> and <strong>.NET</strong>. Managing a component library using <strong>Storybook</strong>."
+    },
+    "education": {
+      "studies": "Studies",
+      "master": {
+        "title": "Master in Computer Engineering & Software · University of Rouen",
+        "description": "You can find my university projects on Github."
+      },
+      "dut": {
+        "title": "DUT Computer Science · IUT Le Havre",
+        "description": "The beginning of my computer science studies!"
+      }
+    }
+  },
+  "projects": {
+    "title": "Personal projects",
+    "dnd": {
+      "title": "D&D World Index",
+      "description": "Character sheets, summaries and initiative tracker for your D&D games, with a great interface made in <strong>Angular</strong>."
+    },
+    "poker": {
+      "title": "Poker Planning",
+      "description": "A poker planning app. Perfect when everyone is working remotely! Built with <strong>React</strong> and <strong>socket.io</strong>."
+    },
+    "website": {
+      "title": "This website!",
+      "description": "My little corner of the internet. Made only with <strong>HTML</strong>, <strong>CSS</strong> & <strong>Javascript</strong>. Built with <strong>Vite</strong>."
+    }
+  },
+  "articles": {
+    "title": "Articles",
+    "angular": {
+      "title": "Angular: How to make an interactive component like the pros?",
+      "description": "Use the full potential of Angular forms with the <code>ControlValueAccessor</code> interface."
+    },
+    "socketio": {
+      "title": "Socket.io 101",
+      "description": "TO-DO: A summary of my article."
+    },
+    "greencode": {
+      "title": "Green-code: an eco-friendly site is a performant site.",
+      "description": "8 essential techniques in an eco-friendly developer's arsenal."
+    }
+  }
+}

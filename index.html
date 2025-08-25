@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Evan Lajusticia</title>
+  <title data-i18n="meta.title">Evan Lajusticia</title>
 
   <link rel="preload" href="/fonts/HostGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -16,10 +16,10 @@
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Evan Lajusticia - Portfolio - Développeur web créatif">
+  <meta name="description" content="Evan Lajusticia - Portfolio - Développeur web créatif" data-i18n-content="meta.description">
 
-  <meta property="og:title" content="Evan Lajusticia - Développeur Web">
-  <meta property="og:description" content="Evan Lajusticia - Portfolio - Développeur web créatif">
+  <meta property="og:title" content="Evan Lajusticia - Développeur Web" data-i18n-content="meta.ogTitle">
+  <meta property="og:description" content="Evan Lajusticia - Portfolio - Développeur web créatif" data-i18n-content="meta.ogDescription">
 
   <script src="app.js" type="module" defer></script>
 </head>
@@ -29,23 +29,23 @@
   <main class="page-fade">
     <section id="presentation">
       <h1>
-        <span>Salut ! 👋</span> 
-        <span>Moi, c'est Evan.</span>
+        <span data-i18n="presentation.greeting">Salut ! 👋</span> 
+        <span data-i18n="presentation.name">Moi, c'est Evan.</span>
       </h1>
-      <p>
+      <p data-i18n="presentation.intro">
         Je suis un créatif et un développeur web. Je concentre mon travail sur des expériences et interfaces utilisateurs de qualité, et l'<strong>accessibilité</strong> et la <strong>responsabilité écologique</strong> sont au coeur de ma réflexion.
       </p>
       <p>
-        <span>Dans mon temps libre, j'aime travailler sur mes projets personnels, développer des</span>
+        <span data-i18n="presentation.personal">Dans mon temps libre, j'aime travailler sur mes projets personnels, développer des</span>
         <a href="https://turnip-studio.itch.io/" target="_blank">
-          <span>jeux-vidéos</span>
+          <span data-i18n="presentation.games">jeux-vidéos</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
             <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
           </svg>
         </a> 
-        <span> avec mes amis et grimper des blocs dans la salle d'escalade de ma ville. Depuis 3 ans, je travaille chez</span>
+        <span data-i18n="presentation.withFriends"> avec mes amis et grimper des blocs dans la salle d'escalade de ma ville. Depuis 3 ans, je travaille chez</span>
         <a href="https://attineos.com" target="_blank">
-          <span>Attineos</span>
+          <span data-i18n="presentation.company">Attineos</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
             <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
           </svg>
@@ -54,16 +54,16 @@
     </section>
   
     <section id="experience">
-      <h2>Expériences</h2>
+      <h2 data-i18n="experience.title">Expériences</h2>
   
       <table>
         <tr>
           <td class="experience-date">
-            <span>2022 — aujourd'hui</span>
+            <span data-i18n="experience.current.period">2022 — aujourd'hui</span>
           </td>
           <td>
-            <h3>Ingénieur Études & Développement · Attineos</h3>
-            <span>Développement d'applications web en <strong>Angular</strong>, <strong>React</strong> et <strong>.NET</strong>. Gestion d'une librairie de composant à l'aide de <strong>Storybook</strong>.</span>  
+            <h3 data-i18n="experience.current.title">Ingénieur Études & Développement · Attineos</h3>
+            <span data-i18n="experience.current.description">Développement d'applications web en <strong>Angular</strong>, <strong>React</strong> et <strong>.NET</strong>. Gestion d'une librairie de composant à l'aide de <strong>Storybook</strong>.</span>  
             <div class="pills">
               <div class="pill">Angular</div>
               <div class="pill">React</div>
@@ -77,33 +77,33 @@
         </tr>
         <tr>
           <td class="experience-date">
-            <span>Études</span>
+            <span data-i18n="experience.education.studies">Études</span>
           </td>
           <td>
-            <h3>Master Génie Informatique & Logiciel · Université de Rouen</h3>
-            <span>Vous pouvez trouver mes projets universitaires sur mon <a href="https://github.com/evanlaj">Github<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></a>.</span>
+            <h3 data-i18n="experience.education.master.title">Master Génie Informatique & Logiciel · Université de Rouen</h3>
+            <span data-i18n="experience.education.master.description">Vous pouvez trouver mes projets universitaires sur mon <a href="https://github.com/evanlaj">Github<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></a>.</span>
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
-            <h3>DUT Informatique · IUT du Havre</h3>
-            <span>Le début de mes études en informatique !</span>
+            <h3 data-i18n="experience.education.dut.title">DUT Informatique · IUT du Havre</h3>
+            <span data-i18n="experience.education.dut.description">Le début de mes études en informatique !</span>
           </td>
         </tr>
       </table>
     </section>
     
     <section id="projects">
-      <h2>Projets personnels</h2>
+      <h2 data-i18n="projects.title">Projets personnels</h2>
   
       <a class="project" href="https://dnd.evanlajusticia.com/roll-initiative" target="_blank">
         <div class="thumbnail">
           <img src="/img/dnd.webp" alt="D&D World Index" loading="lazy">
         </div>
         <div>
-          <h3>D&D World Index <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
-          <span>Feuille de personnages, résumés et traqueur d'initiative pour vos parties de D&D, avec une superbe interface réalisée en <strong>Angular</strong>.</span>
+          <h3><span data-i18n="projects.dnd.title">D&D World Index</span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
+          <span data-i18n="projects.dnd.description">Feuille de personnages, résumés et traqueur d'initiative pour vos parties de D&D, avec une superbe interface réalisée en <strong>Angular</strong>.</span>
         </div>
       </a>
   
@@ -112,8 +112,8 @@
           <img src="/img/pp.webp" alt="Poker Planning" loading="lazy">
         </div>
         <div>
-          <h3>Poker Planning <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
-          <span>Une appli de poker planning. Parfait quand tout le monde est en télétravail ! Mise en place avec <strong>React</strong> et <strong>socket.io</strong>.</span>
+          <h3><span data-i18n="projects.poker.title">Poker Planning</span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg></h3>
+          <span data-i18n="projects.poker.description">Une appli de poker planning. Parfait quand tout le monde est en télétravail ! Mise en place avec <strong>React</strong> et <strong>socket.io</strong>.</span>
         </div>
       </a>
   
@@ -122,8 +122,8 @@
           <div class="placeholder"></div>
         </div>
         <div>
-          <h3>Ce site internet !</h3>
-          <span>Mon petit coin d'internet. Réalisé uniquement en <strong>HTML</strong>, <strong>CSS</strong> & <strong>Javascript</strong>. Construit avec <strong>Vite</strong>.</span>
+          <h3 data-i18n="projects.website.title">Ce site internet !</h3>
+          <span data-i18n="projects.website.description">Mon petit coin d'internet. Réalisé uniquement en <strong>HTML</strong>, <strong>CSS</strong> & <strong>Javascript</strong>. Construit avec <strong>Vite</strong>.</span>
         </div>
       </a>
   
@@ -140,26 +140,26 @@
     </section>
   
     <section id="articles">
-      <h2>Articles</h2>
+      <h2 data-i18n="articles.title">Articles</h2>
       
       <a class="article" href="/articles/angular-components">
         <div>
-          <h3>Angular : Comment faire un composant interactif comme les pros ?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
-          <span>Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>.</span>
+          <h3><span data-i18n="articles.angular.title">Angular : Comment faire un composant interactif comme les pros ?</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+          <span data-i18n="articles.angular.description">Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>.</span>
         </div>
       </a>
   
       <a class="article" href="#">
         <div>
-          <h3>Socket.io : Les bases<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
-          <span>TO-DO : Un résumé de mon article.</span>
+          <h3><span data-i18n="articles.socketio.title">Socket.io : Les bases</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+          <span data-i18n="articles.socketio.description">TO-DO : Un résumé de mon article.</span>
         </div>
       </a>
   
       <a class="article" href="/articles/green-code">
         <div>
-          <h3>Green-code : un site éco-responsable est un site performant.<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
-          <span>8 techniques essentiels dans l'arsenal d'un développeur éco-responsable.</span>
+          <h3><span data-i18n="articles.greencode.title">Green-code : un site éco-responsable est un site performant.</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg></h3>
+          <span data-i18n="articles.greencode.description">8 techniques essentiels dans l'arsenal d'un développeur éco-responsable.</span>
         </div>
       </a>
   
@@ -177,7 +177,7 @@
         <span class="section-title">Colophon</span>
         <span>HTML, CSS & JS</span>
         <span>Host Grotesk</span>
-        <span class="">Material Icons</span>
+        <span>Material Icons</span>
         <a href="https://github.com/evanlaj/portfolio" target="_blank">
           <span>Sources</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">

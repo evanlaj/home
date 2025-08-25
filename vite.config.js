@@ -2,7 +2,8 @@ import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { viteArticlePlugin } from './vite-article-plugin.js'
+import { viteArticlePlugin } from './scripts/vite-article-plugin.js'
+import { viteI18nPlugin } from './scripts/vite-i18n-plugin.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -12,6 +13,7 @@ export default defineConfig({
   // Plugins
   plugins: [
     viteArticlePlugin(),
+    viteI18nPlugin(),
     createHtmlPlugin({
       minify: {
         collapseWhitespace: true,
