@@ -69,7 +69,7 @@ pre[class*="language-"] {
   border-bottom: 1px solid var(--highlight-alt);
 
   padding: 1rem 1.125rem;
-  border-radius: 1.25rem 1.375rem 1.25rem 1.375rem;
+  border-radius: 0.75rem;
 
   & > code {
     border: none;

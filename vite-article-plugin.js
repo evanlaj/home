@@ -16,11 +16,23 @@ import 'prismjs/components/prism-bash.js';
 import 'prismjs/components/prism-markdown.js';
 import 'prismjs/components/prism-scss.js'
 
-// Configure marked with basic options first
 marked.setOptions({
   gfm: true,
   breaks: false
 });
+
+function calculateReadTime(text) {
+  const plainText = text.replace(/<[^>]*>/g, '');
+  
+  const wordsPerMinute = 220;
+  
+  const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
+  const wordCount = words.length;
+  
+  const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
+  
+  return `${readingTimeMinutes} min de lecture`;
+}
 
 // Function to post-process HTML and add syntax highlighting
 function addSyntaxHighlighting(html) {
@@ -100,11 +112,14 @@ export function viteArticlePlugin(options = {}) {
           // Add syntax highlighting
           const highlightedHtml = addSyntaxHighlighting(htmlContent);
           
+          // Calculate reading time
+          const readTime = calculateReadTime(markdownContent);
+          
           // Create article HTML structure
           const articleHtml = `
         <div class="article-header">
           <h1 class="article-title">${frontmatter.title || articleName}</h1>
-          ${frontmatter.description ? `<span class="article-description">${frontmatter.date} · ${frontmatter.description}</span>` : ''}
+          <div class="article-meta">${frontmatter.date} · ${readTime}</div>
         </div>
         <article class="article-content">
           ${highlightedHtml}
@@ -134,7 +149,8 @@ export function viteArticlePlugin(options = {}) {
           articles.push({
             name: articleName,
             content: finalHtml,
-            frontmatter: frontmatter
+            frontmatter: frontmatter,
+            readTime: readTime
           });
           
           console.log(`   ✅ Processed: ${articleName}.html`);
@@ -191,6 +207,7 @@ export function viteArticlePlugin(options = {}) {
           title: article.frontmatter.title || article.name,
           description: article.frontmatter.description || '',
           date: article.frontmatter.date || '',
+          readTime: article.readTime,
           url: `/articles/${article.name}`,
           tags: article.frontmatter.tags || []
         })).sort((a, b) => new Date(b.date) - new Date(a.date));

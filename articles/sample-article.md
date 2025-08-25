@@ -1,7 +1,7 @@
 ---
 title: "Sample Article"
 description: "A sample article to test the build script"
-date: "2025-01-24"
+date: "24/01/2025"
 ---
 
 This is a sample article to test our build script. It includes various markdown features to ensure everything works correctly.

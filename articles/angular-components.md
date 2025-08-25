@@ -1,7 +1,7 @@
 ---
 title: "Angular : Comment faire un composant interactif comme les pros ?"
 description: "Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>."
-date: "2025-04-30"
+date: "30/04/2025"
 ---
 
 ## Introduction
