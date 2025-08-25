@@ -45,7 +45,7 @@ function addSyntaxHighlighting(html) {
           .replace(/&gt;/g, '>')
           .replace(/&amp;/g, '&')
           .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'");
+          .replace(/&#39;/g, "'");
         
         const highlighted = Prism.highlight(decodedCode, Prism.languages[lang], lang);
         return `<pre class="language-${lang}"><code class="language-${lang}">${highlighted}</code></pre>`;
