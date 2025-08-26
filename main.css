@@ -443,13 +443,23 @@ footer {
     padding-right: 0;
     padding-bottom: 0.5rem;
   }
+
+  .article, .project {
+    --padding: 1rem;
+    border-radius: var(--padding);
+    padding: 0.5rem var(--padding);
+  }
+
+  th {
+    display: none;
+  }
   
-  table tr {
+  tr {
     display: block;
     margin-bottom: 2rem;
   }
   
-  table td {
+  td {
     display: block;
     padding-bottom: 0.5rem;
   }
