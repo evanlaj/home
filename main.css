@@ -220,7 +220,7 @@ td {
   padding-bottom: 2.5rem;
 }
 
-code {
+:not(pre) > code {
   display: inline-block;
   background : var(--highlight-alt);
   padding: 0.125rem .25rem;
@@ -407,11 +407,11 @@ footer {
   }
   
   h1 {
-    font-size: 36px;
+    font-size: 34px;
   }
   
   h2 {
-    font-size: 28px;
+    font-size: 26px;
   }
   
   footer {
