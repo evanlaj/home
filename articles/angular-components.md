@@ -1,21 +1,16 @@
 ---
 title: "Angular : Comment faire un composant interactif comme les pros ?"
 description: "Utilisez le plein potentiel des formulaires Angular avec l'interface <code>ControlValueAccessor</code>."
-date: "30/04/2025"
+date: "08/09/2025"
 ---
 
 ## Introduction
 
-> Afin de simplifier la lecture, tous les imports ont été volontairement omis dans les extraits de code.
-Le code source de cet articleest disponible en son intégralité ici <= TODO.
-> 
+> ⚠️ Cet article nécessite d'être familier avec Angular. C'est une bonne idée de connaitre les notions de [FormGroup](https://angular.dev/api/forms/FormGroup#description), [FormControl](https://angular.dev/api/forms/FormControl#description) et l'attribut [[(ngModel)]](https://angular.dev/api/forms/NgModel#description) avant de lire la suite !  
 
-> ⚠️ Cet article nécessite d'être familier avec Angular. C'est une bonne idée de connaitre les notions de FormGroup, FormControl et l'attribut [(ngModel)] avant de lire la suite !
-> 
+Créer un champ de formulaire personnalisé peut s’avérer nécessaire dans de nombreuses situations ; que ce soit parce que le composant n'existe pas nativement, n'est pas dans votre bibliothèque de composants ou encore pour gagner plus de contrôle sur le comportement de votre application, il est très probable qu’un développeur Angular soit un jour confronté à ce problème.
 
-Créer un champ de formulaire personnalisé peut s’avérer nécessaire dans de nombreuses situations ; que ce soit parce que le composant n'existe pas nativement, n'est pas dans votre bibliothèque de composant ou encore pour gagner plus de contrôle sur le comportement de votre application, il est très probable qu’un développeur Angular soit un jour confronté à ce problème.
-
-Heureusement, Angular met a disposition deux API robustes pour gérer les formulaires : les **Forms** et les **ReactiveForms**. Dans cet article, nous allons voir ensemble comment créer un composant compatible avec l’écosysteme d’Angular, en respectant les conventions attendues par ces deux API.
+Heureusement, Angular met à disposition deux API robustes pour gérer les formulaires : les **Forms** et les **ReactiveForms**. Dans cet article, nous allons voir ensemble comment créer un composant compatible avec l’écosysteme d’Angular, en respectant les conventions attendues par ces deux API.
 
 En implémentant un input de cette manière on s’assure :
 
@@ -23,6 +18,9 @@ En implémentant un input de cette manière on s’assure :
 - La compatibilité avec les API de gestion de formulaires (Forms & ReactiveForms)
 - La possibilité d’ajouter, au besoin, de la validation, des états (`disabled`, `touched`, `invalid`, etc.) et d'autres comportements liés aux formulaires
 - Un composant réutilisable, prévisible et facile à maintenir
+
+> Afin de simplifier la lecture, tous les imports ont été volontairement omis dans les extraits de code.
+> Le code source de cet article est disponible en son intégralité [ici](https://github.com/evanlaj/angular-examples).
 
 ## Exemple 1 : Le composant `star-rating`
 
@@ -34,7 +32,7 @@ Commençons directement avec un premier composant. Dans cette première partie, 
 
 ### L’objectif
 
-Créer un **composant d’input réutilisable** compatible avec les Reactive Forms. Il pourra ensuite être utilisé dans un `FormGroup` comme n’importe quel champ natif. 
+Créer un **composant d’input réutilisable** compatible avec les Reactive Forms. Il pourra ensuite être utilisé dans un `FormGroup` comme n’importe quel champ natif.
 
 Par exemple :
 
@@ -194,7 +192,6 @@ Sans oublier de mettre à jour l’HTML :
 En testant le composant dans un formulaire, on se rend compte qu’il n’est toujours pas bien reconnu par Angular. Aussi, une erreur apparaît dans la console :
 
 > ⚠️ ERROR RuntimeError: NG01203: No value accessor for form control name: 'rating'. Find more at [https://angular.dev/errors/NG01203](https://angular.dev/errors/NG01203)
-> 
 
 La raison est qu’il manque le provider `NG_VALUE_ACCESSOR` afin de spécifier l’implémentation de `ControlValueAccessor`. Il n’est pas nécessaire de connaître les détails de l’implémentation du provider, puisqu’elle est quasi-systématiquement la même pour tous les composants, mais vous pouvez en apprendre plus [ici](https://angular.dev/api/forms/NG_VALUE_ACCESSOR).
 
@@ -220,7 +217,7 @@ Voici le code à ajouter :
   ],
 })
 export class StarRatingComponent implements ControlValueAccessor {
-	// ...
+  // ...
 }
 ```
 
@@ -293,7 +290,7 @@ Maintenant que vous savez implémenter un composant compatible `ControlValueAcce
 - le champ `disabled`
 - la gestion de `writeValue()`
 
-De plus, dans l’exemple précédent, notre composant `star-rating` ne prend pas en compte la valeur de `disabled` et ne change pas de style selon la validité du composant. 
+De plus, dans l’exemple précédent, notre composant `star-rating` ne prend pas en compte la valeur de `disabled` et ne change pas de style selon la validité du composant.
 
 Toutes ces choses seront obligatoire pour chaque nouveau composant, mais il n’est pas nécessaire de réécrire le code à chaque fois. Plutôt que de copier-coller le code, nous allons créer une **classe de base abstraite** qui encapsule ce comportement.
 
@@ -367,13 +364,11 @@ export abstract class BasicInput<T = any> implements ControlValueAccessor {
 }
 ```
 
-Cette classe reprend, dans les grandes lignes, l’implémentation de `ControlValueAccessor` réalisée dans la partie 1. Lorsque un composant hérite de `BasicInput`, toutes ces méthodes seront déjà implémenté et la valeur du champs sera accessible en interne grâce à la propriété `data`.
+Cette classe reprend, dans les grandes lignes, l’implémentation de `ControlValueAccessor` réalisée dans la partie 1. Lorsqu'un composant hérite de `BasicInput`, toutes ces méthodes seront déjà implémentées et la valeur du champs sera accessible en interne grâce à la propriété `data`.
 
-Un changement notable est que cet attribut a été implémenté via un getter et un setter, de manière a automatiquement appeler `onChange()` lorsque la valeur de `data` est changée dans le composant !
+Un changement notable est que cet attribut a été implémenté via un getter et un setter, de manière à automatiquement appeler `onChange()` lorsque la valeur de `data` est changée dans le composant !
 
-> ⚠️ Attention ! 
-La méthode onChange ne doit être appelée que lorsque la valeur du champ a été changée **en interne**. La méthode `writeValue()` est utilisée lorsque la valeur est changée en externe (directement via le formGroup, par exemple). Elle ne doit donc pas appeler onChange.
-> 
+> ⚠️ Attention ! La méthode onChange ne doit être appelée que lorsque la valeur du champ a été changée **en interne**. La méthode `writeValue()` est utilisée lorsque la valeur est changée en externe (directement via le formGroup, par exemple). Elle ne doit donc pas appeler onChange.
 
 ### Validation et plus encore
 
@@ -465,7 +460,7 @@ export abstract class BasicInput<T = any> implements ControlValueAccessor, OnIni
 
 ```
 
-La principale nouveauté est l’obtention d’une référence au control injecté dans notre composant (soit par l’attribut `formControl`/`formControlName`, soit par l’attribute `ngModel`). Cette référence nous permet de déduire des informations sur l’état du formulaire. Dans le cas de notre classe `BasicInput`, j’ai décidé de rajouté le getter `validValue` afin de pouvoir styliser nos futurs composants en cas d’erreur, et `required`, afin d’afficher si nécessaire une indication sur le label de nos champs comme c’est souvent le cas.
+La principale nouveauté est l’obtention d’une référence au control injecté dans notre composant (soit par l’attribut `formControl`/`formControlName`, soit par l’attribute `ngModel`). Cette référence nous permet de déduire des informations sur l’état du formulaire. Dans le cas de notre classe `BasicInput`, j’ai décidé d'ajouter le getter `validValue` afin de pouvoir styliser nos futurs composants en cas d’erreur, et `required`, afin d’afficher, si nécessaire, une indication sur le label de nos champs, comme c’est souvent le cas.
 
 Voici le code complet de la classe `BasicInput` :
 
@@ -634,9 +629,9 @@ Comme pour le premier exemple, nous allons partir d’un composant fonctionnel, 
   <span class="title">{{ label }}</span>
 }
 <label class="input-wrapper">
-  <div class="color-preview" [style.backgroundColor]="'#'+color"></div>
+  <div class="color-preview" [style.backgroundColor]="'#'+ color"></div>
   <span class="hashtag">#</span>
-  <input type="text" [(ngModel)]="color" />
+  <input type="text" (blur)="onBlur()" [(ngModel)]="color" />
 </label>
 ```
 
@@ -664,7 +659,7 @@ export class ColorInputComponent {
   @Input()
   label ?: string;
 
-  _color: string = 'ff0000';
+  _color: string = 'c0ffee';
 
   //#endregion
 
@@ -674,14 +669,19 @@ export class ColorInputComponent {
 
   //#endregion
 
+  //#region ------ METHODS ------
+
+  onBlur() {
+    if (this.color.length === 3) 
+      this.color = this.color.replace(/([0-9A-F])/gi, '$1$1');
+  }
+
+  //#endregion
+
   //#region ------ GETTERS & SETTERS ------
 
   set color(value: string) {  
     if(!value.match(this.HEX_REGEX)) return;
-
-    if (value.length === 4) 
-      value = value.replace(/([0-9A-F])/gi, '$1$1');
-
     this._color = value;
   }
 
@@ -721,14 +721,6 @@ export class ColorInputComponent {
     border: #c0c0ce solid 1px;
     outline: 2px solid #c0c0ce80;
   }
-
-  &:is(:focus, :focus-within) {
-    & .overlay {
-      pointer-events: all;
-      opacity: 1;
-      scale: 1;
-    }
-  }
 }
 
 .color-preview {
@@ -766,5 +758,179 @@ input {
     outline: none;
   }
 }
-
 ```
+
+Le composant est fonctionnel, et sa valeur sera mise à jour à chaque fois qu'un code héxadécimal valide y sera entré, mais nous n'avons pas facilement accès à sa valeur. Utilisons la classe `BasicInput` pour régler ce problème.
+
+### Implémenter `BasicInput`
+
+Maintenant que le composant de base est prêt, nous allons le transformer à l'aide de la classe BasicInput. Cette approche va nous permettre de considérablement simplifier l'implémentation de notre composant (en comparaison avec l'exemple 1), tout en ajoutant les fonctionnalités nécessaires, et plus encore.
+
+La première étape est de faire hériter notre composant de la classe `BasicInput`. Modifions le composant pour qu'il étende `BasicInput<string>` (puisque la valeur de notre champ sera une chaîne de caractères), et ajoutons le provider NG_VALUE_ACCESSOR :
+
+```tsx
+// color-input.component.ts
+
+@Component({
+  selector: 'app-color-input',
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  templateUrl: './color-input.component.html',
+  styleUrl: './color-input.component.scss',
+  providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => ColorInputComponent),
+        multi: true,
+      },
+    ],
+})
+export class ColorInputComponent extends BasicInput<string> implements ControlValueAccessor, OnInit  {
+  //#region ------ READ-ONLY ------
+
+  readonly HEX_REGEX = /^([0-9A-F]{3}){1,2}$/i;
+
+  //#endregion
+
+  //#region ------ PROPERTIES ------
+
+  @Input()
+  label ?: string;
+
+  //#endregion
+
+  //#region ------ LIFE CYCLE ------
+
+  override ngOnInit() {
+    super.ngOnInit();
+
+    if (this.control) {
+      this.control.addValidators(this.hexValidator.bind(this));
+    }
+  }
+
+  //#region ------ METHODS ------
+
+  hexValidator(control: AbstractControl): { [key: string]: any } | null {
+    if (!this.HEX_REGEX.test(control.value)) {
+      return { 'invalidHex': { value: control.value } };
+    }
+    return null;
+  }
+
+  onBlur() {
+    if (this.data && this.data.length === 3) 
+      this.data = this.data.replace(/([0-9A-F])/gi, '$1$1');
+  }
+
+  //#endregion
+}
+```
+
+Avec `BasicInput`, la valeur du composant est gérée via la propriété `data`, nous avons donc supprimé toute notion de `color` dans le composant. La validation de l'hexadécimal est ajoutée sous forme d'un validateur personnalisé, qui sera automatiquement pris en compte par Angular, et exploité afin de styliser le composant.
+
+Du côté du template, il faut également remplacer les occurrences de `color` par `data`, et ajouter des classes conditionnelles pour gérer les états `disabled` et `invalid` :
+
+```html
+<!-- color-input.component.html -->
+@if (label) {
+  <span class="title" [class.invalid]="!validValue">{{ label + (required ? ' *' : '') }}</span>
+}
+<label class="input-wrapper" [class.invalid]="!validValue">
+  <div class="color-preview" [style.backgroundColor]="'#'+ data"></div>
+  <span class="hashtag">#</span>
+  <input type="text" (blur)="onBlur()" [(ngModel)]="data" [disabled]="disabled" />
+</label>
+```
+
+La classe `invalid` est appliquée au label et au titre si la valeur du champ n'est pas valide. Le champ `input` est également désactivé si la propriété `disabled` est vraie. De plus, le label affiche une astérisque si le champ est requis.
+
+Enfin, voici le style mis à jour pour gérer les nouveaux états :
+
+```scss
+// color-input.component.scss (extraits)
+
+.title {
+  // ...
+
+  transition: color 0.2s ease-in-out;
+
+  &.invalid {
+    color: rgb(var(--error));
+  }
+}
+
+.input-wrapper {
+  // ...
+
+  &:is(:hover, :focus, :focus-within):not(:has([disabled])) {
+    border: #c0c0ce solid 1px;
+    outline: 2px solid #c0c0ce80;
+
+    &.invalid {
+      border: rgb(var(--error)) solid 1px;
+      outline: 2px solid rgba(var(--error), 0.5);
+    }
+  }
+
+  &.invalid {
+    border: rgb(var(--error)) solid 1px;
+  }
+
+  &:has([disabled]) {
+    cursor: default;
+    border: #ceceda dashed 1px;
+  }
+}
+```
+
+Avec ces quelques modifications, notre composant est désormais complet, il est :
+
+- Compatible avec les ReactiveForms et Forms
+- Capable de gérer les états `disabled` et `invalid`
+- Capable d'afficher si le champ est `required`
+- Visuellement réactif aux erreurs de validation
+
+Le composant peut maintenant être utilisé comme n'importe quel input natif :
+
+```html
+
+<!-- Utilisation dans un formulaire -->
+<form [formGroup]="form">
+  <app-color-input 
+    formControlName="color" 
+    label="Color input"
+  />
+</form>
+
+<!-- Ou avec ngModel -->
+<app-color-input 
+  [(ngModel)]="color" 
+  label="Color input"
+/>
+```
+
+## Pour conclure
+
+Il est facile de créer des composants d'input personnalisés avec Angular, mais suivre les bonnes pratiques permet de s'assurer que ces composants sont robustes, réutilisables et compatibles avec l'écosystème Angular. De plus, même si cette approche peut sembler opaque lorsqu'on la découvre, c'est finalement une approche très structurée, qui facilite la maintenance et l'évolution des composants.
+
+Voici un rapide résumé des points clés :
+
+1. Le provider `NG_VALUE_ACCESSOR`.
+Cette petite configuration est cruciale pour qu'Angular reconnaisse le composant comme un champ de formulaire.
+C'est une étape toujours identique, mais nécessaire, et facile à oublier.
+
+2. L'interface `ControlValueAccessor`.
+Cette interface définit les méthodes que le composant doit implémenter pour interagir avec Angular.
+Encore une fois, l'implémentation est souvent similaire d'un composant à l'autre, mas elle peut être encapsulée entièrement dans une classe de base.
+
+3. La classe `BasicInput`.
+Cette classe abstraite encapsule le code redondant et fournit une base solide pour nos futurs composants.
+Elle maintient une cohérence à travers tous nos composants personnalisés.
+
+### Et maintenant ?
+
+N'hésitez pas à réutiliser et enrichir la classe `BasicInput` en fonction des besoins de vos futurs projets. Le code complet des exemples de cette article est disponible sur [Github](https://github.com/evanlaj/angular-examples).
