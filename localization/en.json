@@ -5,6 +5,10 @@
     "ogTitle": "Evan Lajusticia - Web Developer",
     "ogDescription": "Evan Lajusticia - Portfolio - Creative web developer"
   },
+  "language": {
+    "other": "FR",
+    "toggle": "Switch language"
+  },
   "presentation": {
     "greeting": "Hi ! 👋",
     "name": "I'm Evan.",

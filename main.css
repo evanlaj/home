@@ -128,6 +128,32 @@ body {
   transition: opacity 0.2s ease-in;
 }
 
+/*    TOP BUTTONS    */
+
+.top-buttons {
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+
+  animation: buttons-fade-in 0.2s ease-out both;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+
+  font-family: 'Host Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+
+  padding: 0.5rem 0.875rem;
+  border-radius: 1.5rem;
+}
+
 /*    CONTENT    */
 
 h1, h2 {
@@ -193,7 +219,7 @@ h3 {
   }
 }
 
-a:focus-visible {
+:is(a, button):focus-visible {
   outline: 2px solid var(--body);
   outline-offset: -1px;
 }
@@ -222,7 +248,7 @@ td {
 
 :not(pre) > code {
   display: inline-block;
-  background : var(--highlight-alt);
+  background : var(--focus);
   padding: 0.125rem .25rem;
   border-radius: 0.25rem; 
 
@@ -252,22 +278,10 @@ td {
 
 /*    PROJECTS / ARTICLES    */
 
-.project, .article {
-  cursor: pointer;
-
-  text-decoration: none;
+.project, .article, button {
   color: inherit;
 
-  --padding: 1.25rem;
-
-  display: flex;
-  gap: 1.5rem;
-  margin: 0 calc(-1 * var(--padding)) 2rem;
-
-  padding: 1rem var(--padding);
-  border-radius: 1.25rem 1.375rem 1.25rem 1.375rem;
-
-  background: #EBF8FF00;
+  background: #00000000;
 
   transition: 0.12s ease-out;
   transition-property: background, color;
@@ -282,6 +296,21 @@ td {
     border-top: 2px solid var(--highlight);
     border-bottom: 1px solid var(--highlight-alt);
   }
+}
+
+.project, .article {
+  cursor: pointer;
+
+  text-decoration: none;
+
+  --padding: 1.25rem;
+
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 calc(-1 * var(--padding)) 2rem;
+
+  padding: 1rem var(--padding);
+  border-radius: 1.25rem 1.375rem 1.25rem 1.375rem;
 
   h3 {
     svg {
@@ -531,5 +560,16 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes buttons-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

@@ -6,7 +6,6 @@ function replaceTranslations(html, translations, lang, baseUrl = 'https://evanla
 
   result = result.replace(/lang="fr"/, `lang="${lang}"`)
 
-  // Helper function to get nested value from object
   function getNestedValue(obj, path) {
     return path.split('.').reduce((current, key) => current && current[key], obj)
   }
@@ -36,19 +35,32 @@ function replaceTranslations(html, translations, lang, baseUrl = 'https://evanla
   
   result = result.replace(dataI18nRegex, (match, openTag, tagName, key, content, closeTag) => {
     const translation = getNestedValue(translations, key)
-    if (translation) {
-      return `${openTag}${translation}${closeTag}`
-    }
-    return match
+    if (!translation) return match
+
+    return `${openTag}${translation}${closeTag}`
   })
 
   // Replace data-i18n-content attributes (for meta tags)
-  result = result.replace(/(<[^>]*)(content=")([^"]*)("[^>]*data-i18n-content="([^"]+)"[^>]*>)/g, (match, beforeContent, contentStart, originalContent, afterContent, key) => {
+  result = result.replace(/(<[^>]*)(content=")([^"]*)("[^>]*data-i18n-content="([^"]+)"[^>]*>)/g, (match, beforeContent, contentStart, originalContent, afterContent, key) => {    
     const translation = getNestedValue(translations, key)
-    if (translation) {
-      return `${beforeContent}${contentStart}${translation}${afterContent}`
-    }
-    return match
+    if (!translation) return match
+
+    return `${beforeContent}${contentStart}${translation}${afterContent}`
+  })
+
+  // Replace data-i18n-aria attributes (for aria-labels & titles)
+  result = result.replace(/<(?:[^>]*)(?:data-i18n-aria=\"([^\"]*)\")(?:[^>]*)>/gm, (match, key) => {    
+    const translation = getNestedValue(translations, key)
+
+    if (!translation) return match
+
+    let updatedTag = match
+      .replace(/aria-label="[^"]*"/, '')
+      .replace(/title="[^"]*"/, '')
+      .replace(/data-i18n-aria="[^"]*"/, '')
+      .replace(/<(\w+)/, `<$1 aria-label="${translation}" title="${translation}"`)
+
+    return updatedTag
   })
 
   return result

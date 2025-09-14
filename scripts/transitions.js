@@ -1,4 +1,4 @@
-import { getLocalizedPath } from './lang.js';
+let transitions;
 
 class PageTransitions {
   constructor() {
@@ -18,7 +18,7 @@ class PageTransitions {
     });
 
     // Set initial state
-    if (window.location.pathname !== getLocalizedPath('/')) {
+    if (window.location.pathname !== '/') {
       this.currentView = 'article';
     }
   }
@@ -35,7 +35,7 @@ class PageTransitions {
       const homeLink = e.target.closest('a.home-link[href="/"], a.home-link[href=""]');
       if (homeLink && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
         e.preventDefault();
-        this.navigateToPage(getLocalizedPath('/'), 'home');
+        this.navigateToPage('/', 'home');
       }
     });
   }
@@ -43,7 +43,6 @@ class PageTransitions {
   async navigateToPage(path, view, pushState = true) {
     if (pushState) {
       if (this.isTransitioning) return;
-      if (this.currentView === 'home' && view === 'home') return;
     }
 
     this.isTransitioning = true;
@@ -61,6 +60,7 @@ class PageTransitions {
       window.location.href = path;
     } finally {
       this.isTransitioning = false;
+      attachLangToggle();
     }
   }
 
@@ -71,7 +71,7 @@ class PageTransitions {
     
     if (path === '/') {
       if (this.currentView !== 'home') {
-        await this.navigateToPage(getLocalizedPath('/'), 'home', false);
+        await this.navigateToPage('/', 'home', false);
       }
     } else if (path.startsWith('/articles/')) {
       if (this.currentView !== 'article') {
@@ -153,7 +153,28 @@ class PageTransitions {
   }
 }
 
-// Initialize when DOM is loaded
+function attachLangToggle() {
+  const button = document.getElementById('language-toggle');
+  if (button) button.addEventListener('click', toggleLang);
+}
+
+function toggleLang() {
+  if (!transitions) {
+    console.warn('No transition manager ?');
+    return;
+  }
+
+  if (window.location.pathname.startsWith('/en/')) {
+    const newPath = window.location.pathname.split('/en')[1];
+    transitions.navigateToPage(newPath, transitions.currentView);
+  }
+  else {
+    const newPath = '/en' + window.location.pathname;
+    transitions.navigateToPage(newPath, transitions.currentView);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  new PageTransitions();
+  transitions = new PageTransitions();
+  attachLangToggle();
 });

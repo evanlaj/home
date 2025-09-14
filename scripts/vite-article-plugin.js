@@ -24,7 +24,7 @@ marked.setOptions({
 function calculateReadTime(text) {
   const plainText = text.replace(/<[^>]*>/g, '');
   
-  const wordsPerMinute = 220;
+  const wordsPerMinute = 180;
   
   const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
   const wordCount = words.length;
@@ -69,12 +69,12 @@ export function viteArticlePlugin(options = {}) {
     name: 'vite-article-plugin',
     
     async buildStart() {
-      console.log('🚀 Processing articles...');
+      console.log('Processing articles...');
       
       try {
         // Check if articles directory exists
         if (!await fs.pathExists(articlesDir)) {
-          console.log('⚠️  Articles directory not found, skipping article processing');
+          console.warn('Articles directory not found, skipping article processing');
           return;
         }
         
@@ -85,12 +85,9 @@ export function viteArticlePlugin(options = {}) {
         const files = await fs.readdir(articlesDir);
         const markdownFiles = files.filter(file => file.endsWith('.md'));
         
-        if (markdownFiles.length === 0) {
-          console.log('⚠️  No markdown files found in articles directory');
-          return;
-        }
-        
-        console.log(`📝 Found ${markdownFiles.length} article(s) to process`);
+        console.log(`    Found ${markdownFiles.length} article(s) to process`);
+
+        if (markdownFiles.length === 0) return;
         
         // Reset articles array
         articles = [];
@@ -99,9 +96,7 @@ export function viteArticlePlugin(options = {}) {
         for (const file of markdownFiles) {
           const filePath = path.join(articlesDir, file);
           const articleName = path.basename(file, '.md');
-          
-          console.log(`   Processing: ${file}`);
-          
+                    
           // Read and parse markdown file
           const fileContent = await fs.readFile(filePath, 'utf-8');
           const { data: frontmatter, content: markdownContent } = matter(fileContent);
@@ -153,13 +148,10 @@ export function viteArticlePlugin(options = {}) {
             readTime: readTime
           });
           
-          console.log(`   ✅ Processed: ${articleName}.html`);
-        }
-        
-        console.log(`🎉 Successfully processed ${markdownFiles.length} article(s)!`);
-        
+          console.log(`    ✅ Processed: ${articleName}.html`);
+        }        
       } catch (error) {
-        console.error('❌ Error processing articles:', error);
+        console.error('Error processing articles:', error);
         throw error;
       }
     },
@@ -191,7 +183,7 @@ export function viteArticlePlugin(options = {}) {
             content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);
           
           if (jsAssetFileName)
-            content = content.replace(/src="main\.js"/g, `src="../${jsAssetFileName}"`);
+            content = content.replace(/src="4main\.js"/g, `src="../${jsAssetFileName}"`);
           
           // Emit each article as an asset
           this.emitFile({
@@ -202,23 +194,23 @@ export function viteArticlePlugin(options = {}) {
         }
         
         // Generate and emit article index
-        const articlesIndex = articles.map(article => ({
-          slug: article.name,
-          title: article.frontmatter.title || article.name,
-          description: article.frontmatter.description || '',
-          date: article.frontmatter.date || '',
-          readTime: article.readTime,
-          url: `/articles/${article.name}`,
-          tags: article.frontmatter.tags || []
-        })).sort((a, b) => new Date(b.date) - new Date(a.date));
+        // const articlesIndex = articles.map(article => ({
+        //   slug: article.name,
+        //   title: article.frontmatter.title || article.name,
+        //   description: article.frontmatter.description || '',
+        //   date: article.frontmatter.date || '',
+        //   readTime: article.readTime,
+        //   url: `/articles/${article.name}`,
+        //   tags: article.frontmatter.tags || []
+        // })).sort((a, b) => new Date(b.date) - new Date(a.date));
         
-        this.emitFile({
-          type: 'asset',
-          fileName: 'articles/index.json',
-          source: JSON.stringify(articlesIndex, null, 2)
-        });
+        // this.emitFile({
+        //   type: 'asset',
+        //   fileName: 'articles/index.json',
+        //   source: JSON.stringify(articlesIndex, null, 2)
+        // });
         
-        console.log('📄 Article index generated');
+        // console.log('Article index generated');
         
       } catch (error) {
         console.warn('Warning: Could not add articles to bundle:', error.message);

@@ -1,5 +1,3 @@
-const langs = ['en', '']; // en, fr (default)
-
 function getUserLanguage() {
   const savedLang = localStorage.getItem('lang');
   if (savedLang) return savedLang;
@@ -24,11 +22,5 @@ function goToLocalizedPage(page) {
   if (window.location.pathname !== localizedPath)
     window.location.replace(localizedPath);
 }
-
-const currentPath = window.location.pathname;
-const langSegment = currentPath.split('/')[1];
-
-if (langs.includes(langSegment))
-    goToLocalizedPage('/');
 
 export { getUserLanguage, getLocalizedPath, goToLocalizedPage };
