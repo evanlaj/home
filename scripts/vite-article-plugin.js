@@ -21,7 +21,7 @@ marked.setOptions({
   breaks: false
 });
 
-function calculateReadTime(text) {
+function calculateReadTime(text, isEnglish) {
   const plainText = text.replace(/<[^>]*>/g, '');
   
   const wordsPerMinute = 180;
@@ -31,7 +31,7 @@ function calculateReadTime(text) {
   
   const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
   
-  return `${readingTimeMinutes} min de lecture`;
+  return `${readingTimeMinutes} min ` + (isEnglish ? "read" : "de lecture");
 }
 
 // Function to post-process HTML and add syntax highlighting
@@ -83,7 +83,10 @@ export function viteArticlePlugin(options = {}) {
         
         // Get all markdown files from articles directory
         const files = await fs.readdir(articlesDir);
-        const markdownFiles = files.filter(file => file.endsWith('.md'));
+        const englishFiles = (await fs.readdir(path.join(articlesDir, 'en'))).map(file => "ENG-" + file);
+        
+        const markdownFiles = files.concat(englishFiles).filter(file => file.endsWith('.md'));
+        console.log('    All articles found:', markdownFiles);
         
         console.log(`    Found ${markdownFiles.length} article(s) to process`);
 
@@ -94,8 +97,20 @@ export function viteArticlePlugin(options = {}) {
         
         // Process each markdown file
         for (const file of markdownFiles) {
-          const filePath = path.join(articlesDir, file);
-          const articleName = path.basename(file, '.md');
+
+          let fileName = file;
+
+          let isEnglish = false;
+          if (file.startsWith("ENG-")) {
+            isEnglish = true;
+            fileName = fileName.slice(4);
+          }
+
+          let filePath = path.join(articlesDir, fileName);
+          if (isEnglish)
+            filePath = path.join(articlesDir, 'en', fileName);
+
+          const articleName = path.basename(fileName, '.md');
                     
           // Read and parse markdown file
           const fileContent = await fs.readFile(filePath, 'utf-8');
@@ -108,7 +123,7 @@ export function viteArticlePlugin(options = {}) {
           const highlightedHtml = addSyntaxHighlighting(htmlContent);
           
           // Calculate reading time
-          const readTime = calculateReadTime(markdownContent);
+          const readTime = calculateReadTime(markdownContent, isEnglish);
           
           // Create article HTML structure
           const articleHtml = `
@@ -139,17 +154,24 @@ export function viteArticlePlugin(options = {}) {
               `<meta property="og:description" content="${frontmatter.description}">`
             );
           }
+
+          if (isEnglish) {
+            finalHtml = finalHtml.replace("href=\"/\"", "href=\"/en/\"");
+            finalHtml = finalHtml.replace("Retour à la page d'accueil", "Back to homepage");
+          }
           
           // Store article data for later use
           articles.push({
             name: articleName,
+            en: isEnglish,
             content: finalHtml,
             frontmatter: frontmatter,
             readTime: readTime
           });
           
-          console.log(`    ✅ Processed: ${articleName}.html`);
-        }        
+          console.log(`    ✅ Processed: ${articleName}`);
+        }
+
       } catch (error) {
         console.error('Error processing articles:', error);
         throw error;
@@ -177,18 +199,20 @@ export function viteArticlePlugin(options = {}) {
           let content = article.content;
           
           if (cssAssetFileName)
-            content = content.replace(/href="\/main\.css"/g, `href="../${cssAssetFileName}"`);
+            content = content.replace(/href="\/main\.css"/g, `href="/${cssAssetFileName}"`);
           
           if (articlesAssetFileName)
-            content = content.replace(/href="\/articles\.css"/g, `href="../${articlesAssetFileName}"`);
+            content = content.replace(/href="\/articles\.css"/g, `href="/${articlesAssetFileName}"`);
           
           if (jsAssetFileName)
-            content = content.replace(/src="4main\.js"/g, `src="../${jsAssetFileName}"`);
+            content = content.replace(/src="main\.js"/g, `src="/${jsAssetFileName}"`);
+
+          const fileName = (article.en ? "en/" : "") + `articles/${article.name}.html`;
           
           // Emit each article as an asset
           this.emitFile({
             type: 'asset',
-            fileName: `articles/${article.name}.html`,
+            fileName: fileName,
             source: content
           });
         }

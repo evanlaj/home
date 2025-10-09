@@ -6,7 +6,7 @@ date: "08/09/2025"
 
 ## Introduction
 
-> ⚠️ Cet article nécessite d'être familier avec Angular. C'est une bonne idée de connaitre les notions de [FormGroup](https://angular.dev/api/forms/FormGroup#description), [FormControl](https://angular.dev/api/forms/FormControl#description) et l'attribut [[(ngModel)]](https://angular.dev/api/forms/NgModel#description) avant de lire la suite !  
+> ⚠️ Cet article nécessite d'être familier avec Angular. C'est une bonne idée de connaitre les notions de [FormGroup](https://angular.dev/api/forms/FormGroup#description), [FormControl](https://angular.dev/api/forms/FormControl#description) et l'attribut [\[(ngModel)\]](https://angular.dev/api/forms/NgModel#description) avant de lire la suite !  
 
 Créer un champ de formulaire personnalisé peut s’avérer nécessaire dans de nombreuses situations ; que ce soit parce que le composant n'existe pas nativement, n'est pas dans votre bibliothèque de composants ou encore pour gagner plus de contrôle sur le comportement de votre application, il est très probable qu’un développeur Angular soit un jour confronté à ce problème.
 
@@ -20,6 +20,7 @@ En implémentant un input de cette manière on s’assure :
 - Un composant réutilisable, prévisible et facile à maintenir
 
 > Afin de simplifier la lecture, tous les imports ont été volontairement omis dans les extraits de code.
+> Cet article a été écrit sous Angular 20, mais les concepts abordés devraient être valables pour toutes les versions récentes d'Angular.
 > Le code source de cet article est disponible en son intégralité [ici](https://github.com/evanlaj/angular-examples).
 
 ## Exemple 1 : Le composant `star-rating`
@@ -292,7 +293,7 @@ Maintenant que vous savez implémenter un composant compatible `ControlValueAcce
 
 De plus, dans l’exemple précédent, notre composant `star-rating` ne prend pas en compte la valeur de `disabled` et ne change pas de style selon la validité du composant.
 
-Toutes ces choses seront obligatoire pour chaque nouveau composant, mais il n’est pas nécessaire de réécrire le code à chaque fois. Plutôt que de copier-coller le code, nous allons créer une **classe de base abstraite** qui encapsule ce comportement.
+Toutes ces choses seront obligatoires pour chaque nouveau composant, mais il n’est pas nécessaire de réécrire le code à chaque fois. Plutôt que de copier-coller le code, nous allons créer une **classe de base abstraite** qui encapsule ce comportement.
 
 ### L’objectif
 
@@ -933,4 +934,4 @@ Elle maintient une cohérence à travers tous nos composants personnalisés.
 
 ### Et maintenant ?
 
-N'hésitez pas à réutiliser et enrichir la classe `BasicInput` en fonction des besoins de vos futurs projets. Le code complet des exemples de cette article est disponible sur [Github](https://github.com/evanlaj/angular-examples).
+N'hésitez pas à réutiliser et enrichir la classe `BasicInput` en fonction des besoins de vos futurs projets. Le code complet des exemples de cette article est disponible sur [Github](https://github.com/evanlaj/angular-examples), et vous pouvez observer le résultat final sur [StackBlitz](https://stackblitz.com/~/github.com/evanlaj/angular-examples).

@@ -63,6 +63,10 @@ function replaceTranslations(html, translations, lang, baseUrl = 'https://evanla
     return updatedTag
   })
 
+  if (lang !== 'fr') {
+    result = result.replace("href=\"/articles", `href=\"/${lang}/articles`);
+  }
+
   return result
 }
 

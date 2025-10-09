@@ -25,17 +25,17 @@ class PageTransitions {
 
   setupLinkInterception() {
     document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[href^="/articles/"]');
+      const link = e.target.closest('a[href^="/articles/"], a[href^="/en/articles/"]');
       if (link && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
         e.preventDefault();
         this.navigateToPage(link.getAttribute('href'), 'article');
       }
 
       // Handle home link clicks in articles (more specific selector)
-      const homeLink = e.target.closest('a.home-link[href="/"], a.home-link[href=""]');
+      const homeLink = e.target.closest('a.home-link[href="/"], a.home-link[href=""], a.home-link[href="/en/"]');
       if (homeLink && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
         e.preventDefault();
-        this.navigateToPage('/', 'home');
+        this.navigateToPage(homeLink.getAttribute('href'), 'home');
       }
     });
   }
