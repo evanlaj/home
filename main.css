@@ -432,11 +432,16 @@ footer {
 
 @media (max-width: 768px) {
   body {
-    padding: 10rem 2rem 6rem;
+    padding: 8rem 2rem 6rem;
+  }
+
+  .top-buttons {
+    top: 2rem;
+    right: 2rem;
   }
   
   h1 {
-    font-size: 34px;
+    font-size: 30px;
   }
   
   h2 {
@@ -465,7 +470,20 @@ footer {
 
 @media (max-width: 480px) {
   body {
-    padding: 10rem 1.5rem 4rem;
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  section {
+    margin-bottom: 4rem;
+
+    &:first-of-type {
+      margin-bottom: 8rem;
+    }
+  }
+
+  .top-buttons {
+    top: 1rem;
+    right: 1rem;
   }
   
   .experience-date {
